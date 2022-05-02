@@ -53,9 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 400,
         child: ListView(
           children: [
-            ...list.asMap().entries.map((entry) {
-              final cardContentIndexed = entry;
-
+            ...list.asMap().entries.map((cardContentIndexed) {
               return Draggable<MapEntry<int, String>>(
                 data: cardContentIndexed,
                 child: _cardDragTarget(cardContentIndexed),

@@ -53,15 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 400,
         child: ListView(
           children: [
-            ...list.map((text) {
-              return Draggable(
-                child: _textCard(text),
+            ...list.asMap().entries.map((entry) {
+              final cardContentIndexed = entry;
+
+              return Draggable<MapEntry<int, String>>(
+                data: cardContentIndexed,
+                child: _cardDragTarget(cardContentIndexed),
                 feedback: _textCard(
-                  text,
+                  cardContentIndexed.value,
                   backgroundColor: const Color(0xAAFF6E40),
                 ),
                 childWhenDragging: _textCard(
-                  text,
+                  cardContentIndexed.value,
                   shouldHide: true,
                 ),
               );
@@ -69,6 +72,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  DragTarget<MapEntry<int, String>> _cardDragTarget(
+    MapEntry<int, String> cardContentIndexed,
+  ) {
+    return DragTarget<MapEntry<int, String>>(
+      onAccept: (cardDragged) {
+        setState(() {
+          final newPost = cardContentIndexed.value + "\n\n" + cardDragged.value;
+          list[cardContentIndexed.key] = newPost;
+          list.removeAt(cardDragged.key);
+        });
+      },
+      builder: (_, __, ___) {
+        return _textCard(cardContentIndexed.value);
+      },
     );
   }
 

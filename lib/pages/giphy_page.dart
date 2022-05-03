@@ -1,6 +1,7 @@
-import 'package:drag_test/no_versioned_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:giphy_picker/giphy_picker.dart';
+
+import '../no_versioned_constants.dart';
 
 class GiphyPage extends StatefulWidget {
   const GiphyPage({Key? key}) : super(key: key);
@@ -19,6 +20,20 @@ class _GiphyPageState extends State<GiphyPage> {
       fullScreenDialog: false,
       decorator: const GiphyDecorator(showAppBar: false),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    print("LOG::: iniciando tela :::");
+  }
+
+  @override
+  void didUpdateWidget(covariant GiphyPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    print("LOG::: parent atualizado :::");
   }
 
   @override

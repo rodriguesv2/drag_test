@@ -14,14 +14,22 @@ class DragDropMergePage extends StatefulWidget {
 
 class _DragDropMergePageState extends State<DragDropMergePage> {
   final list = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet venenatis magna, et fringilla ante.",
-    "Etiam ut felis in metus placerat dapibus. Vestibulum fringilla iaculis dui, eu iaculis nulla blandit vel.",
-    "Aenean eget tellus vitae sem euismod feugiat. Phasellus lobortis eleifend urna, quis consequat augue semper a. Etiam condimentum cursus venenatis. Mauris id suscipit enim. Phasellus pellentesque luctus condimentum.",
-    "Nullam ut lacus tortor. Cras non erat purus. In felis justo, tristique at accumsan nec, lobortis non odio.",
-    "Donec fringilla ante mi, a faucibus eros hendrerit non. Aenean elementum enim sed nibh aliquet venenatis. In egestas dignissim nisi lobortis viverra. Cras et quam nunc.",
-    "Quisque varius, orci ac blandit commodo, metus dui congue lacus, quis rhoncus quam sapien eu augue. In eu ex et nisl pellentesque congue a eget nisl.",
-    "Vestibulum convallis erat ac nunc aliquet, in mattis dolor aliquet. Donec id suscipit nunc, eget gravida nunc. ",
-    "Integer ultrices quam mi, ut feugiat felis mattis id. Donec ornare vehicula efficitur. Sed lectus erat, laoreet quis leo vel, volutpat tempor ante.",
+    "#1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet venenatis magna, et fringilla ante.",
+    "#2 Etiam ut felis in metus placerat dapibus. Vestibulum fringilla iaculis dui, eu iaculis nulla blandit vel.",
+    "#3 Aenean eget tellus vitae sem euismod feugiat. Phasellus lobortis eleifend urna, quis consequat augue semper a. Etiam condimentum cursus venenatis. Mauris id suscipit enim. Phasellus pellentesque luctus condimentum.",
+    "#4 Nullam ut lacus tortor. Cras non erat purus. In felis justo, tristique at accumsan nec, lobortis non odio.",
+    "#5 Donec fringilla ante mi, a faucibus eros hendrerit non. Aenean elementum enim sed nibh aliquet venenatis. In egestas dignissim nisi lobortis viverra. Cras et quam nunc.",
+    "#6 Quisque varius, orci ac blandit commodo, metus dui congue lacus, quis rhoncus quam sapien eu augue. In eu ex et nisl pellentesque congue a eget nisl.",
+    "#7 Vestibulum convallis erat ac nunc aliquet, in mattis dolor aliquet. Donec id suscipit nunc, eget gravida nunc. ",
+    "#8 Integer ultrices quam mi, ut feugiat felis mattis id. Donec ornare vehicula efficitur. Sed lectus erat, laoreet quis leo vel, volutpat tempor ante.",
+    "#9 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent imperdiet venenatis magna, et fringilla ante.",
+    "#10 Etiam ut felis in metus placerat dapibus. Vestibulum fringilla iaculis dui, eu iaculis nulla blandit vel.",
+    "#11 Aenean eget tellus vitae sem euismod feugiat. Phasellus lobortis eleifend urna, quis consequat augue semper a. Etiam condimentum cursus venenatis. Mauris id suscipit enim. Phasellus pellentesque luctus condimentum.",
+    "#12 Nullam ut lacus tortor. Cras non erat purus. In felis justo, tristique at accumsan nec, lobortis non odio.",
+    "#13 Donec fringilla ante mi, a faucibus eros hendrerit non. Aenean elementum enim sed nibh aliquet venenatis. In egestas dignissim nisi lobortis viverra. Cras et quam nunc.",
+    "#14 Quisque varius, orci ac blandit commodo, metus dui congue lacus, quis rhoncus quam sapien eu augue. In eu ex et nisl pellentesque congue a eget nisl.",
+    "#15 Vestibulum convallis erat ac nunc aliquet, in mattis dolor aliquet. Donec id suscipit nunc, eget gravida nunc. ",
+    "#16 Integer ultrices quam mi, ut feugiat felis mattis id. Donec ornare vehicula efficitur. Sed lectus erat, laoreet quis leo vel, volutpat tempor ante.",
   ];
 
   @override
@@ -30,24 +38,31 @@ class _DragDropMergePageState extends State<DragDropMergePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SizedBox(
-        width: 400,
-        child: ListView(
+      body: SingleChildScrollView(
+        child: Row(
           children: [
-            ...list.asMap().entries.map((cardContentIndexed) {
-              return Draggable<MapEntry<int, String>>(
-                data: cardContentIndexed,
-                child: _cardDragTarget(cardContentIndexed),
-                feedback: _textCard(
-                  cardContentIndexed.value,
-                  backgroundColor: const Color(0xAAFF6E40),
-                ),
-                childWhenDragging: _textCard(
-                  cardContentIndexed.value,
-                  shouldHide: true,
-                ),
-              );
-            }).toList(),
+            SizedBox(
+              width: 400,
+              child: Column(
+                children: [
+                  ...list.asMap().entries.map((cardContentIndexed) {
+                    return Draggable<MapEntry<int, String>>(
+                      data: cardContentIndexed,
+                      child: _cardDragTarget(cardContentIndexed),
+                      feedback: _textCard(
+                        cardContentIndexed.value,
+                        backgroundColor: const Color(0xAAFF6E40),
+                      ),
+                      childWhenDragging: _textCard(
+                        cardContentIndexed.value,
+                        shouldHide: true,
+                      ),
+                    );
+                  }).toList(),
+                ],
+              ),
+            ),
+            const Spacer(),
           ],
         ),
       ),
@@ -55,8 +70,8 @@ class _DragDropMergePageState extends State<DragDropMergePage> {
   }
 
   DragTarget<MapEntry<int, String>> _cardDragTarget(
-      MapEntry<int, String> cardContentIndexed,
-      ) {
+    MapEntry<int, String> cardContentIndexed,
+  ) {
     return DragTarget<MapEntry<int, String>>(
       onAccept: (cardDragged) {
         setState(() {
@@ -72,10 +87,10 @@ class _DragDropMergePageState extends State<DragDropMergePage> {
   }
 
   Widget _textCard(
-      String text, {
-        Color backgroundColor = const Color(0xFFFF6E40),
-        bool shouldHide = false,
-      }) {
+    String text, {
+    Color backgroundColor = const Color(0xFFFF6E40),
+    bool shouldHide = false,
+  }) {
     return SizedBox(
       width: 400,
       child: Card(

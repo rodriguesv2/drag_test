@@ -3,14 +3,14 @@ import 'package:giphy_picker/giphy_picker.dart';
 
 import '../no_versioned_constants.dart';
 
-class GiphyPage extends StatefulWidget {
-  const GiphyPage({Key? key}) : super(key: key);
+class GiphyApiPage extends StatefulWidget {
+  const GiphyApiPage({Key? key}) : super(key: key);
 
   @override
-  State<GiphyPage> createState() => _GiphyPageState();
+  State<GiphyApiPage> createState() => _GiphyApiPageState();
 }
 
-class _GiphyPageState extends State<GiphyPage> {
+class _GiphyApiPageState extends State<GiphyApiPage> {
   final List<String?> _listUrl = [null, null, null, null];
 
   Future<GiphyGif?> _searchGif() async {
@@ -18,34 +18,10 @@ class _GiphyPageState extends State<GiphyPage> {
       context: context,
       apiKey: GIPHY_API_KEY,
       fullScreenDialog: false,
-      decorator: GiphyDecorator(
+      decorator: const GiphyDecorator(
         showAppBar: false,
-        giphyTheme: Theme.of(context).copyWith(
-          scaffoldBackgroundColor: Colors.white30,
-          appBarTheme: const AppBarTheme(
-            toolbarHeight: 80,
-            iconTheme: IconThemeData(
-              size: 40,
-              color: Colors.white,
-            ),
-          ),
-        ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    print("LOG::: iniciando tela :::");
-  }
-
-  @override
-  void didUpdateWidget(covariant GiphyPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    print("LOG::: parent atualizado :::");
   }
 
   @override
@@ -53,7 +29,6 @@ class _GiphyPageState extends State<GiphyPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Teste Giphy"),
-        backgroundColor: Colors.black38,
       ),
       body: SingleChildScrollView(
         child: SizedBox(
